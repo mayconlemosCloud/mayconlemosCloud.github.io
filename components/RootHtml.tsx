@@ -42,6 +42,9 @@ export default function RootHtml({ lang, children }: Props) {
               <a href={`${home}#agora`}>{t.nav.agora}</a>
               <a href={`${home}#contato`}>{t.nav.contato}</a>
             </nav>
+            <a className="cv-link" href={t.curriculo.arquivo} target="_blank" rel="noopener">
+              {t.curriculo.curto}
+            </a>
             <LangSwitch
               current={lang}
               label={t.idioma}

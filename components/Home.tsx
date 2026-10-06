@@ -19,6 +19,9 @@ export default function Home({ lang }: { lang: Lang }) {
               <a className="btn btn-primary" href="#cases">
                 {t.hero.verCases}
               </a>
+              <a className="btn" href={t.curriculo.arquivo} target="_blank" rel="noopener">
+                {t.curriculo.label}
+              </a>
               <a className="btn" href={links.linkedin} target="_blank" rel="noopener">
                 LinkedIn
               </a>
@@ -188,6 +191,9 @@ export default function Home({ lang }: { lang: Lang }) {
           <div className="hero-cta">
             <a className="btn btn-primary" href={links.linkedin} target="_blank" rel="noopener">
               {t.contato.linkedin}
+            </a>
+            <a className="btn" href={t.curriculo.arquivo} target="_blank" rel="noopener">
+              {t.curriculo.label}
             </a>
             <a className="btn" href={links.github} target="_blank" rel="noopener">
               {t.contato.github}

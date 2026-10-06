@@ -154,6 +154,7 @@ a {
     font-size: 20px;
     text-decoration: none;
     margin-right: auto;
+    white-space: nowrap;
   }
   nav {
     display: flex;
@@ -166,6 +167,18 @@ a {
   }
   nav a:hover {
     color: var(--ink);
+  }
+  .cv-link {
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .cv-link:hover {
+    opacity: 0.88;
   }
   .lang-switch {
     display: flex;
@@ -205,6 +218,18 @@ a {
   @media (max-width: 900px) {
     nav {
       display: none;
+    }
+  }
+  @media (max-width: 420px) {
+    .topbar-inner {
+      gap: 10px;
+    }
+    .brand {
+      font-size: 18px;
+    }
+    .cv-link {
+      padding: 5px 10px;
+      font-size: 13px;
     }
   }
 

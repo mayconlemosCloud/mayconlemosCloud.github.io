@@ -50,6 +50,7 @@ export interface Dict {
     aprendizados: string;
     proximo: string;
   };
+  curriculo: { label: string; curto: string; arquivo: string };
   footer: string;
   idioma: string;
 }
@@ -177,7 +178,8 @@ export const ui: Record<Lang, Dict> = {
       aprendizados: 'O que aprendi e o que faria diferente',
       proximo: 'Próximo case',
     },
-    footer: 'Feito com Astro · publicado no GitHub Pages',
+    curriculo: { label: 'Baixar currículo', curto: 'Currículo', arquivo: '/curriculo/Maycon_Lemos_Curriculo_PT.pdf' },
+    footer: 'Feito com Next.js · publicado no GitHub Pages',
     idioma: 'Idioma',
   },
 
@@ -300,7 +302,8 @@ export const ui: Record<Lang, Dict> = {
       aprendizados: 'What I learned and would do differently',
       proximo: 'Next case study',
     },
-    footer: 'Built with Astro · hosted on GitHub Pages',
+    curriculo: { label: 'Download résumé', curto: 'Résumé', arquivo: '/curriculo/Maycon_Lemos_Resume_EN.pdf' },
+    footer: 'Built with Next.js · hosted on GitHub Pages',
     idioma: 'Language',
   },
 
@@ -423,7 +426,8 @@ export const ui: Record<Lang, Dict> = {
       aprendizados: 'Ce que j’ai appris et ce que je ferais autrement',
       proximo: 'Étude de cas suivante',
     },
-    footer: 'Réalisé avec Astro · hébergé sur GitHub Pages',
+    curriculo: { label: 'Télécharger le CV (en anglais)', curto: 'CV', arquivo: '/curriculo/Maycon_Lemos_Resume_EN.pdf' },
+    footer: 'Réalisé avec Next.js · hébergé sur GitHub Pages',
     idioma: 'Langue',
   },
 };
