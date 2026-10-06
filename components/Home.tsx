@@ -9,6 +9,8 @@ function iniciais(nome: string) {
   return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
 }
 
+// Ordem pensada como funil de quem avalia: quem é → prova social → conexão → experiência →
+// prova técnica → confiança → forma de pensar → requisitos → momento atual → contato.
 export default function Home({ lang }: { lang: Lang }) {
   const t = ui[lang];
   const cases = getCases(lang);
@@ -22,19 +24,22 @@ export default function Home({ lang }: { lang: Lang }) {
             <h1 className="display hero-title">{t.hero.titulo}</h1>
             <p className="hero-sub">{t.hero.sub}</p>
             <div className="hero-cta">
-              <a className="btn btn-primary" href="#cases">
-                {t.hero.verCases}
-              </a>
-              <a className="btn" href={t.curriculo.arquivo} target="_blank" rel="noopener">
+              <a className="btn btn-primary" href={t.curriculo.arquivo} target="_blank" rel="noopener">
                 {t.curriculo.label}
               </a>
-              <a className="btn" href={links.linkedin} target="_blank" rel="noopener">
-                LinkedIn
-              </a>
-              <a className="btn" href={links.github} target="_blank" rel="noopener">
-                GitHub
+              <a className="btn" href="#cases">
+                {t.hero.verCases}
               </a>
             </div>
+            <p className="hero-links">
+              <a href={links.linkedin} target="_blank" rel="noopener">
+                LinkedIn
+              </a>
+              <span aria-hidden="true">·</span>
+              <a href={links.github} target="_blank" rel="noopener">
+                GitHub
+              </a>
+            </p>
           </div>
           <div className="hero-photo">
             <div className="photo-block" aria-hidden="true" />
@@ -66,18 +71,56 @@ export default function Home({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      <section className="section" id="video">
+      <section className="section" id="sobre">
+        <div className="wrap split split-video">
+          <div>
+            <div className="section-head">
+              <p className="eyebrow">{t.sobre.eyebrow}</p>
+              <h2 className="display">{t.sobre.titulo}</h2>
+            </div>
+            <div className="prose">
+              {t.sobre.paragrafos.map((p) => (
+                <p key={p.slice(0, 24)}>{p}</p>
+              ))}
+            </div>
+            <div className="case-stack">
+              {chips.map((c) => (
+                <span className="chip" key={c}>
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div id="video">
+            <p className="video-titulo">{t.video.titulo}</p>
+            <div className="video-wrap">
+              <video controls preload="none" playsInline poster="/video/apresentacao-poster.jpg">
+                <source src="/video/apresentacao.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p className="video-nota">{t.video.nota}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="experiencia">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow">{t.video.eyebrow}</p>
-            <h2 className="display">{t.video.titulo}</h2>
+            <p className="eyebrow">{t.experiencia.eyebrow}</p>
+            <h2 className="display">{t.experiencia.titulo}</h2>
           </div>
-          <div className="video-wrap">
-            <video controls preload="none" playsInline poster="/video/apresentacao-poster.jpg">
-              <source src="/video/apresentacao.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <p className="video-nota">{t.video.nota}</p>
+          <ol className="exp">
+            {t.experiencia.itens.map((e) => (
+              <li key={e.periodo}>
+                <span className="exp-periodo">{e.periodo}</span>
+                <div>
+                  <h3 className="exp-empresa">{e.empresa}</h3>
+                  <p className="exp-cargo">{e.cargo}</p>
+                  <p className="exp-texto">{e.texto}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -113,27 +156,6 @@ export default function Home({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      <section className="section" id="experiencia">
-        <div className="wrap">
-          <div className="section-head">
-            <p className="eyebrow">{t.experiencia.eyebrow}</p>
-            <h2 className="display">{t.experiencia.titulo}</h2>
-          </div>
-          <ol className="exp">
-            {t.experiencia.itens.map((e) => (
-              <li key={e.periodo}>
-                <span className="exp-periodo">{e.periodo}</span>
-                <div>
-                  <h3 className="exp-empresa">{e.empresa}</h3>
-                  <p className="exp-cargo">{e.cargo}</p>
-                  <p className="exp-texto">{e.texto}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
       <section className="section" id="depoimentos">
         <div className="wrap">
           <div className="section-head">
@@ -163,24 +185,6 @@ export default function Home({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      <section className="section" id="formacao">
-        <div className="wrap">
-          <div className="section-head">
-            <p className="eyebrow">{t.formacao.eyebrow}</p>
-            <h2 className="display">{t.formacao.titulo}</h2>
-          </div>
-          <ul className="certs">
-            {t.formacao.itens.map((c) => (
-              <li className="cert" key={c.titulo}>
-                <span className="cert-emissor">{c.emissor}</span>
-                <h3 className="cert-titulo">{c.titulo}</h3>
-                <p className="cert-detalhe">{c.detalhe}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       <section className="section" id="como-trabalho">
         <div className="wrap split">
           <div className="split-photo">
@@ -204,30 +208,21 @@ export default function Home({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      <section className="section" id="sobre">
-        <div className="wrap split reverse">
-          <div>
-            <div className="section-head">
-              <p className="eyebrow">{t.sobre.eyebrow}</p>
-              <h2 className="display">{t.sobre.titulo}</h2>
-            </div>
-            <div className="prose">
-              {t.sobre.paragrafos.map((p) => (
-                <p key={p.slice(0, 24)}>{p}</p>
-              ))}
-            </div>
-            <div className="case-stack">
-              {chips.map((c) => (
-                <span className="chip" key={c}>
-                  {c}
-                </span>
-              ))}
-            </div>
+      <section className="section" id="formacao">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">{t.formacao.eyebrow}</p>
+            <h2 className="display">{t.formacao.titulo}</h2>
           </div>
-          <div className="split-photo">
-            <div className="photo-block small" aria-hidden="true" />
-            <Image src="/fotos/cena3-jeans-sereno.webp" alt={t.sobre.fotoAlt} width={738} height={1030} />
-          </div>
+          <ul className="certs">
+            {t.formacao.itens.map((c) => (
+              <li className="cert" key={c.titulo}>
+                <span className="cert-emissor">{c.emissor}</span>
+                <h3 className="cert-titulo">{c.titulo}</h3>
+                <p className="cert-detalhe">{c.detalhe}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -255,23 +250,29 @@ export default function Home({ lang }: { lang: Lang }) {
       </section>
 
       <section className="section contato" id="contato">
-        <div className="wrap">
-          <p className="eyebrow">{t.contato.eyebrow}</p>
-          <h2 className="display contato-title">{t.contato.titulo}</h2>
-          <div className="hero-cta">
-            <a className="btn btn-whatsapp" href={whatsappUrl(t.whatsapp.mensagem)} target="_blank" rel="noopener">
-              <WhatsAppIcon />
-              {t.whatsapp.label}
-            </a>
-            <a className="btn btn-primary" href={links.linkedin} target="_blank" rel="noopener">
-              {t.contato.linkedin}
-            </a>
-            <a className="btn" href={t.curriculo.arquivo} target="_blank" rel="noopener">
-              {t.curriculo.label}
-            </a>
-            <a className="btn" href={links.github} target="_blank" rel="noopener">
-              {t.contato.github}
-            </a>
+        <div className="wrap split reverse">
+          <div>
+            <p className="eyebrow">{t.contato.eyebrow}</p>
+            <h2 className="display contato-title">{t.contato.titulo}</h2>
+            <div className="hero-cta">
+              <a className="btn btn-whatsapp" href={whatsappUrl(t.whatsapp.mensagem)} target="_blank" rel="noopener">
+                <WhatsAppIcon />
+                {t.whatsapp.label}
+              </a>
+              <a className="btn btn-primary" href={links.linkedin} target="_blank" rel="noopener">
+                {t.contato.linkedin}
+              </a>
+              <a className="btn" href={t.curriculo.arquivo} target="_blank" rel="noopener">
+                {t.curriculo.label}
+              </a>
+              <a className="btn" href={links.github} target="_blank" rel="noopener">
+                {t.contato.github}
+              </a>
+            </div>
+          </div>
+          <div className="split-photo">
+            <div className="photo-block small" aria-hidden="true" />
+            <Image src="/fotos/cena3-jeans-sereno.webp" alt={t.sobre.fotoAlt} width={738} height={1030} />
           </div>
         </div>
       </section>

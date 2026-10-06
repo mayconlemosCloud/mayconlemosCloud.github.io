@@ -36,7 +36,7 @@ interface Experiencia {
 
 export interface Dict {
   meta: { title: string; description: string };
-  nav: { cases: string; experiencia: string; comoTrabalho: string; agora: string; contato: string };
+  nav: { sobre: string; experiencia: string; cases: string; depoimentos: string; contato: string };
   hero: { eyebrow: string; titulo: string; sub: string; verCases: string; fotoAlt: string };
   video: { eyebrow: string; titulo: string; nota: string };
   empresas: { titulo: string };
@@ -104,7 +104,7 @@ export const ui: Record<Lang, Dict> = {
       description:
         'Engenheiro de software há mais de 15 anos: plataformas bancárias e do setor público, .NET, microsserviços e produtos com IA.',
     },
-    nav: { cases: 'Cases', experiencia: 'Experiência', comoTrabalho: 'Como eu trabalho', agora: 'Agora', contato: 'Contato' },
+    nav: { sobre: 'Sobre', experiencia: 'Experiência', cases: 'Cases', depoimentos: 'Depoimentos', contato: 'Contato' },
     hero: {
       eyebrow: 'AI-Native Software Engineer · .NET & IA · +15 anos',
       titulo: 'Sua ideia com IA, pronta para o mundo real.',
@@ -247,7 +247,7 @@ export const ui: Record<Lang, Dict> = {
       description:
         'Software engineer with 15+ years of experience: banking and public-sector platforms, .NET, microservices and AI-powered products.',
     },
-    nav: { cases: 'Work', experiencia: 'Experience', comoTrabalho: 'How I work', agora: 'Now', contato: 'Contact' },
+    nav: { sobre: 'About', experiencia: 'Experience', cases: 'Work', depoimentos: 'Testimonials', contato: 'Contact' },
     hero: {
       eyebrow: 'AI-Native Software Engineer · .NET & AI · 15+ years',
       titulo: 'Your AI idea, ready for the real world.',
@@ -391,7 +391,7 @@ export const ui: Record<Lang, Dict> = {
       description:
         'Ingénieur logiciel depuis plus de 15 ans : plateformes bancaires et du secteur public, .NET, microservices et produits intégrant l’IA.',
     },
-    nav: { cases: 'Projets', experiencia: 'Expérience', comoTrabalho: 'Ma méthode', agora: 'En ce moment', contato: 'Contact' },
+    nav: { sobre: 'À propos', experiencia: 'Expérience', cases: 'Projets', depoimentos: 'Témoignages', contato: 'Contact' },
     hero: {
       eyebrow: 'AI-Native Software Engineer · .NET & IA · +15 ans',
       titulo: 'Votre idée avec l’IA, prête pour le monde réel.',

@@ -868,3 +868,33 @@ a {
     display: none;
   }
 }
+
+/* ---------- ajustes de ordem/conversão ---------- */
+.hero-links {
+  margin: 18px 0 0;
+  display: flex;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--ink-muted);
+}
+.hero-links a {
+  color: var(--ink-soft);
+  text-underline-offset: 4px;
+}
+.hero-links a:hover {
+  color: var(--ink);
+}
+.split.split-video {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+}
+.video-titulo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  margin: 0 0 16px;
+}
+@media (max-width: 860px) {
+  .split.split-video {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

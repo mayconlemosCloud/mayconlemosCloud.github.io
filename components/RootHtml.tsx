@@ -37,10 +37,10 @@ export default function RootHtml({ lang, children }: Props) {
               Maycon Lemos
             </Link>
             <nav aria-label="Principal">
-              <a href={`${home}#cases`}>{t.nav.cases}</a>
+              <a href={`${home}#sobre`}>{t.nav.sobre}</a>
               <a href={`${home}#experiencia`}>{t.nav.experiencia}</a>
-              <a href={`${home}#como-trabalho`}>{t.nav.comoTrabalho}</a>
-              <a href={`${home}#agora`}>{t.nav.agora}</a>
+              <a href={`${home}#cases`}>{t.nav.cases}</a>
+              <a href={`${home}#depoimentos`}>{t.nav.depoimentos}</a>
               <a href={`${home}#contato`}>{t.nav.contato}</a>
             </nav>
             <a className="cv-link" href={t.curriculo.arquivo} target="_blank" rel="noopener">
