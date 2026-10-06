@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getCases } from '@/lib/cases';
-import { ui, links, localize, chips, type Lang } from '@/lib/i18n';
+import { ui, links, localize, chips, whatsappUrl, type Lang } from '@/lib/i18n';
+import WhatsAppIcon from './WhatsAppIcon';
 
 export default function Home({ lang }: { lang: Lang }) {
   const t = ui[lang];
@@ -189,6 +190,10 @@ export default function Home({ lang }: { lang: Lang }) {
           <p className="eyebrow">{t.contato.eyebrow}</p>
           <h2 className="display contato-title">{t.contato.titulo}</h2>
           <div className="hero-cta">
+            <a className="btn btn-whatsapp" href={whatsappUrl(t.whatsapp.mensagem)} target="_blank" rel="noopener">
+              <WhatsAppIcon />
+              {t.whatsapp.label}
+            </a>
             <a className="btn btn-primary" href={links.linkedin} target="_blank" rel="noopener">
               {t.contato.linkedin}
             </a>

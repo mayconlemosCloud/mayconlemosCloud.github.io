@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { langs, langLabel, htmlLang, localize, ui, type Lang } from '@/lib/i18n';
+import { langs, langLabel, htmlLang, localize, ui, whatsappUrl, type Lang } from '@/lib/i18n';
 import { fraunces, inter } from '@/lib/site';
 import LangSwitch from './LangSwitch';
+import WhatsAppIcon from './WhatsAppIcon';
 
 // Idioma automático: só na primeira visita, só nas páginas em português (sem prefixo)
 // e só se o visitante ainda não escolheu um idioma. Links compartilhados em /en ou /fr são respeitados.
@@ -56,9 +57,18 @@ export default function RootHtml({ lang, children }: Props) {
         <footer className="footer">
           <div className="wrap footer-inner">
             <span>© {new Date().getFullYear()} Maycon Lemos</span>
-            <span>{t.footer}</span>
           </div>
         </footer>
+        <a
+          className="whatsapp-float"
+          href={whatsappUrl(t.whatsapp.mensagem)}
+          target="_blank"
+          rel="noopener"
+          aria-label={t.whatsapp.label}
+          title={t.whatsapp.label}
+        >
+          <WhatsAppIcon />
+        </a>
       </body>
     </html>
   );

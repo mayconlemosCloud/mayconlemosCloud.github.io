@@ -636,3 +636,48 @@ a {
   .proximo:hover .proximo-title {
     color: var(--accent);
   }
+
+/* ---------- WhatsApp ---------- */
+.whatsapp-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s;
+}
+.whatsapp-float:hover {
+  transform: scale(1.06);
+}
+.whatsapp-float svg {
+  width: 30px;
+  height: 30px;
+}
+.btn-whatsapp {
+  gap: 8px;
+  background: #25d366;
+  border-color: #25d366;
+  color: #fff;
+}
+.btn-whatsapp:hover {
+  opacity: 0.9;
+}
+.btn-whatsapp svg {
+  width: 18px;
+  height: 18px;
+}
+@media (max-width: 420px) {
+  .whatsapp-float {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
+  }
+}

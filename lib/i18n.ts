@@ -8,7 +8,13 @@ export const langLabel: Record<Lang, string> = { pt: 'PT', en: 'EN', fr: 'FR' };
 export const links = {
   linkedin: 'https://www.linkedin.com/in/mayconlemos',
   github: 'https://github.com/mayconlemosCloud',
+  // Número do currículo: (21) 99791-3361
+  whatsapp: '5521997913361',
 };
+
+export function whatsappUrl(mensagem: string): string {
+  return `https://wa.me/${links.whatsapp}?text=${encodeURIComponent(mensagem)}`;
+}
 
 /** Caminho sem prefixo de idioma ("/", "/cases/x/") → caminho no idioma pedido. */
 export function localize(path: string, lang: Lang): string {
@@ -51,7 +57,7 @@ export interface Dict {
     proximo: string;
   };
   curriculo: { label: string; curto: string; arquivo: string };
-  footer: string;
+  whatsapp: { label: string; mensagem: string };
   idioma: string;
 }
 
@@ -157,7 +163,6 @@ export const ui: Record<Lang, Dict> = {
         { rotulo: 'Construindo', texto: 'Funcionalidades com LLMs para o setor jurídico público na Softplan.' },
         { rotulo: 'Aprofundando', texto: 'GraphRAG, reranking e workflows duráveis com Temporal.' },
         { rotulo: 'Praticando', texto: 'Desenvolvimento com agentes de código: especificação, skills e MCP servers.' },
-        { rotulo: 'Publicando', texto: 'Este portfólio em três idiomas, com deploy automatizado.' },
       ],
     },
     contato: {
@@ -179,7 +184,7 @@ export const ui: Record<Lang, Dict> = {
       proximo: 'Próximo case',
     },
     curriculo: { label: 'Baixar currículo', curto: 'Currículo', arquivo: '/curriculo/Maycon_Lemos_Curriculo_PT.pdf' },
-    footer: 'Feito com Next.js · publicado no GitHub Pages',
+    whatsapp: { label: 'Conversar no WhatsApp', mensagem: 'Olá, Maycon! Vi seu portfólio e gostaria de conversar.' },
     idioma: 'Idioma',
   },
 
@@ -281,7 +286,6 @@ export const ui: Record<Lang, Dict> = {
         { rotulo: 'Building', texto: 'LLM-powered features for the public legal sector at Softplan.' },
         { rotulo: 'Deepening', texto: 'GraphRAG, reranking and durable workflows with Temporal.' },
         { rotulo: 'Practicing', texto: 'Development with coding agents: specs, skills and MCP servers.' },
-        { rotulo: 'Shipping', texto: 'This portfolio in three languages, with automated deployment.' },
       ],
     },
     contato: {
@@ -303,7 +307,7 @@ export const ui: Record<Lang, Dict> = {
       proximo: 'Next case study',
     },
     curriculo: { label: 'Download résumé', curto: 'Résumé', arquivo: '/curriculo/Maycon_Lemos_Resume_EN.pdf' },
-    footer: 'Built with Next.js · hosted on GitHub Pages',
+    whatsapp: { label: 'Chat on WhatsApp', mensagem: 'Hi Maycon! I saw your portfolio and would like to talk.' },
     idioma: 'Language',
   },
 
@@ -405,7 +409,6 @@ export const ui: Record<Lang, Dict> = {
         { rotulo: 'Je construis', texto: 'Des fonctionnalités basées sur les LLM pour le secteur juridique public chez Softplan.' },
         { rotulo: 'J’approfondis', texto: 'GraphRAG, le reranking et les workflows durables avec Temporal.' },
         { rotulo: 'Je pratique', texto: 'Le développement avec des agents de code : spécifications, skills et serveurs MCP.' },
-        { rotulo: 'Je publie', texto: 'Ce portfolio en trois langues, avec déploiement automatisé.' },
       ],
     },
     contato: {
@@ -427,7 +430,7 @@ export const ui: Record<Lang, Dict> = {
       proximo: 'Étude de cas suivante',
     },
     curriculo: { label: 'Télécharger le CV (en anglais)', curto: 'CV', arquivo: '/curriculo/Maycon_Lemos_Resume_EN.pdf' },
-    footer: 'Réalisé avec Next.js · hébergé sur GitHub Pages',
+    whatsapp: { label: 'Discuter sur WhatsApp', mensagem: 'Bonjour Maycon ! J’ai vu votre portfolio et j’aimerais échanger.' },
     idioma: 'Langue',
   },
 };
