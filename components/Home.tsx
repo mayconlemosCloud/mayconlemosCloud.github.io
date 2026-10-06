@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getCases } from '@/lib/cases';
-import { ui, links, localize, chips, empresas, prints, whatsappUrl, type Lang } from '@/lib/i18n';
+import { ui, links, localize, chips, empresas, whatsappUrl, type Lang } from '@/lib/i18n';
 import WhatsAppIcon from './WhatsAppIcon';
 
 function iniciais(nome: string) {
@@ -160,16 +160,6 @@ export default function Home({ lang }: { lang: Lang }) {
           <a className="link-arrow ver-linkedin" href={links.recomendacoes} target="_blank" rel="noopener">
             {t.depoimentos.verLinkedin} →
           </a>
-          <h3 className="retro-titulo">{t.depoimentos.printsTitulo}</h3>
-          <div className="prints">
-            {prints.map((p, i) => (
-              <figure className={p.largura > 900 ? 'print print-largo' : 'print'} key={p.src}>
-                <Image src={p.src} alt={t.depoimentos.printsAlt[i]} width={p.largura} height={p.altura} />
-                <figcaption>{t.depoimentos.legendas[p.tipo]}</figcaption>
-              </figure>
-            ))}
-          </div>
-          <p className="retro-fonte">{t.depoimentos.printsNota}</p>
         </div>
       </section>
 
