@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getCases } from '@/lib/cases';
-import { ui, links, localize, chips, whatsappUrl, type Lang } from '@/lib/i18n';
+import { ui, links, localize, chips, empresas, whatsappUrl, type Lang } from '@/lib/i18n';
 import WhatsAppIcon from './WhatsAppIcon';
 
 export default function Home({ lang }: { lang: Lang }) {
@@ -40,6 +40,19 @@ export default function Home({ lang }: { lang: Lang }) {
               height={1050}
               priority
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="empresas" aria-label={t.empresas.titulo}>
+        <p className="empresas-titulo">{t.empresas.titulo}</p>
+        <div className="marquee">
+          <div className="marquee-track">
+            {[...empresas, ...empresas].map((e, i) => (
+              <span className="marquee-item" key={i} aria-hidden={i >= empresas.length ? true : undefined}>
+                {e}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -109,6 +122,24 @@ export default function Home({ lang }: { lang: Lang }) {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section className="section" id="formacao">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">{t.formacao.eyebrow}</p>
+            <h2 className="display">{t.formacao.titulo}</h2>
+          </div>
+          <ul className="certs">
+            {t.formacao.itens.map((c) => (
+              <li className="cert" key={c.titulo}>
+                <span className="cert-emissor">{c.emissor}</span>
+                <h3 className="cert-titulo">{c.titulo}</h3>
+                <p className="cert-detalhe">{c.detalhe}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

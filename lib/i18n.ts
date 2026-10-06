@@ -38,6 +38,8 @@ export interface Dict {
   nav: { cases: string; experiencia: string; comoTrabalho: string; agora: string; contato: string };
   hero: { eyebrow: string; titulo: string; sub: string; verCases: string; fotoAlt: string };
   video: { eyebrow: string; titulo: string; nota: string };
+  empresas: { titulo: string };
+  formacao: { eyebrow: string; titulo: string; itens: { emissor: string; titulo: string; detalhe: string }[] };
   cases: { eyebrow: string; titulo: string };
   experiencia: { eyebrow: string; titulo: string; itens: Experiencia[] };
   comoTrabalho: { eyebrow: string; titulo: string; fotoAlt: string; principios: Item[] };
@@ -64,6 +66,21 @@ export interface Dict {
 const chips = ['.NET / C#', 'Node.js', 'React / Next.js', 'Angular', 'Kafka / RabbitMQ', 'AWS / Azure', 'RAG / GraphRAG', 'MCP / Multi-agent', 'Temporal'];
 export { chips };
 
+// Empresas e clientes por onde passou (nomes em texto; trocar por logos oficiais em SVG se tiver os arquivos)
+export const empresas = [
+  'Itaú Unibanco',
+  'BTG Pactual',
+  'Softplan',
+  'BRQ Digital Solutions',
+  'IPDV',
+  'Droga Raia',
+  'Drogaria Pacheco',
+  'Oi',
+  'Rio Saúde',
+  'Exército Brasileiro',
+  'Marinha do Brasil',
+];
+
 export const ui: Record<Lang, Dict> = {
   pt: {
     meta: {
@@ -78,6 +95,17 @@ export const ui: Record<Lang, Dict> = {
       sub: 'Da arquitetura à interface: mais de 15 anos de .NET, microsserviços e plataformas bancárias, agora a serviço de produtos com IA.',
       verCases: 'Ver cases',
       fotoAlt: 'Maycon Lemos de braços cruzados, sorrindo e olhando para o alto',
+    },
+    empresas: { titulo: 'Empresas e projetos em que atuei' },
+    formacao: {
+      eyebrow: 'Formação',
+      titulo: 'Formação e certificações.',
+      itens: [
+        { emissor: 'AWS', titulo: 'Assessment for AWS Partner: Accreditation (Technical)', detalhe: 'Amazon Web Services' },
+        { emissor: 'Azure', titulo: 'Microsoft Azure Fundamentals (AZ-900)', detalhe: 'Microsoft' },
+        { emissor: 'Anthropic', titulo: 'Claude 101', detalhe: 'Anthropic Academy · 2026' },
+        { emissor: 'Graduação', titulo: 'Bacharelado em Sistemas de Informação', detalhe: 'Faculdade Mercúrio · 2013–2017' },
+      ],
     },
     video: {
       eyebrow: 'Apresentação',
@@ -202,6 +230,17 @@ export const ui: Record<Lang, Dict> = {
       verCases: 'See case studies',
       fotoAlt: 'Maycon Lemos with arms crossed, smiling and looking up',
     },
+    empresas: { titulo: 'Companies and projects I have worked on' },
+    formacao: {
+      eyebrow: 'Education',
+      titulo: 'Education and certifications.',
+      itens: [
+        { emissor: 'AWS', titulo: 'Assessment for AWS Partner: Accreditation (Technical)', detalhe: 'Amazon Web Services' },
+        { emissor: 'Azure', titulo: 'Microsoft Azure Fundamentals (AZ-900)', detalhe: 'Microsoft' },
+        { emissor: 'Anthropic', titulo: 'Claude 101', detalhe: 'Anthropic Academy · 2026' },
+        { emissor: 'Degree', titulo: 'B.S. in Information Systems', detalhe: 'Faculdade Mercúrio · 2013–2017' },
+      ],
+    },
     video: {
       eyebrow: 'Introduction',
       titulo: 'Get to know me in 2 minutes.',
@@ -324,6 +363,17 @@ export const ui: Record<Lang, Dict> = {
       sub: 'De l’architecture à l’interface : plus de 15 ans de .NET, de microservices et de plateformes bancaires, désormais au service de produits d’IA.',
       verCases: 'Voir les projets',
       fotoAlt: 'Maycon Lemos, bras croisés, souriant et regardant vers le haut',
+    },
+    empresas: { titulo: 'Entreprises et projets sur lesquels j’ai travaillé' },
+    formacao: {
+      eyebrow: 'Formation',
+      titulo: 'Formation et certifications.',
+      itens: [
+        { emissor: 'AWS', titulo: 'Assessment for AWS Partner: Accreditation (Technical)', detalhe: 'Amazon Web Services' },
+        { emissor: 'Azure', titulo: 'Microsoft Azure Fundamentals (AZ-900)', detalhe: 'Microsoft' },
+        { emissor: 'Anthropic', titulo: 'Claude 101', detalhe: 'Anthropic Academy · 2026' },
+        { emissor: 'Diplôme', titulo: 'Licence en systèmes d’information', detalhe: 'Faculdade Mercúrio · 2013–2017' },
+      ],
     },
     video: {
       eyebrow: 'Présentation',
