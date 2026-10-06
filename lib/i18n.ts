@@ -104,7 +104,7 @@ export const ui: Record<Lang, Dict> = {
         { emissor: 'AWS', titulo: 'Assessment for AWS Partner: Accreditation (Technical)', detalhe: 'Amazon Web Services' },
         { emissor: 'Azure', titulo: 'Microsoft Azure Fundamentals (AZ-900)', detalhe: 'Microsoft' },
         { emissor: 'Anthropic', titulo: 'Claude 101', detalhe: 'Anthropic Academy · 2026' },
-        { emissor: 'Graduação', titulo: 'Bacharelado em Sistemas de Informação', detalhe: 'Faculdade Mercúrio · 2013–2017' },
+        { emissor: 'Graduação', titulo: 'Bacharelado em Sistemas de Informação', detalhe: 'Faculdade Mercúrio · diploma emitido pela UFRJ · 2013–2017' },
       ],
     },
     video: {
@@ -238,7 +238,7 @@ export const ui: Record<Lang, Dict> = {
         { emissor: 'AWS', titulo: 'Assessment for AWS Partner: Accreditation (Technical)', detalhe: 'Amazon Web Services' },
         { emissor: 'Azure', titulo: 'Microsoft Azure Fundamentals (AZ-900)', detalhe: 'Microsoft' },
         { emissor: 'Anthropic', titulo: 'Claude 101', detalhe: 'Anthropic Academy · 2026' },
-        { emissor: 'Degree', titulo: 'B.S. in Information Systems', detalhe: 'Faculdade Mercúrio · 2013–2017' },
+        { emissor: 'Degree', titulo: 'B.S. in Information Systems', detalhe: 'Faculdade Mercúrio · diploma issued by UFRJ (Federal University of Rio de Janeiro) · 2013–2017' },
       ],
     },
     video: {
@@ -372,7 +372,7 @@ export const ui: Record<Lang, Dict> = {
         { emissor: 'AWS', titulo: 'Assessment for AWS Partner: Accreditation (Technical)', detalhe: 'Amazon Web Services' },
         { emissor: 'Azure', titulo: 'Microsoft Azure Fundamentals (AZ-900)', detalhe: 'Microsoft' },
         { emissor: 'Anthropic', titulo: 'Claude 101', detalhe: 'Anthropic Academy · 2026' },
-        { emissor: 'Diplôme', titulo: 'Licence en systèmes d’information', detalhe: 'Faculdade Mercúrio · 2013–2017' },
+        { emissor: 'Diplôme', titulo: 'Licence en systèmes d’information', detalhe: 'Faculdade Mercúrio · diplôme délivré par l’UFRJ (Université fédérale de Rio de Janeiro) · 2013–2017' },
       ],
     },
     video: {
