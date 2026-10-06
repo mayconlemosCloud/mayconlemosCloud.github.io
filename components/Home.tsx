@@ -50,7 +50,11 @@ export default function Home({ lang }: { lang: Lang }) {
           <div className="marquee-track">
             {[...empresas, ...empresas].map((e, i) => (
               <span className="marquee-item" key={i} aria-hidden={i >= empresas.length ? true : undefined}>
-                {e}
+                {e.logo ? (
+                  <img src={e.logo} alt={e.nome} style={{ height: e.altura }} loading="lazy" />
+                ) : (
+                  e.nome
+                )}
               </span>
             ))}
           </div>

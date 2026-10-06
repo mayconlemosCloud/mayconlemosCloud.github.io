@@ -66,19 +66,27 @@ export interface Dict {
 const chips = ['.NET / C#', 'Node.js', 'React / Next.js', 'Angular', 'Kafka / RabbitMQ', 'AWS / Azure', 'RAG / GraphRAG', 'MCP / Multi-agent', 'Temporal'];
 export { chips };
 
-// Empresas e clientes por onde passou (nomes em texto; trocar por logos oficiais em SVG se tiver os arquivos)
-export const empresas = [
-  'Itaú Unibanco',
-  'BTG Pactual',
-  'Softplan',
-  'BRQ Digital Solutions',
-  'IPDV',
-  'Droga Raia',
-  'Drogaria Pacheco',
-  'Oi',
-  'Rio Saúde',
-  'Exército Brasileiro',
-  'Marinha do Brasil',
+// Empresas e clientes por onde passou. Logos oficiais (SVG do Wikimedia Commons) quando disponíveis;
+// as demais aparecem como texto. Exército e Marinha ficam em texto: símbolos das Forças Armadas têm uso restrito.
+export interface Empresa {
+  nome: string;
+  logo?: string;
+  /** altura da logo em px, para equilibrar formatos diferentes */
+  altura?: number;
+}
+
+export const empresas: Empresa[] = [
+  { nome: 'Itaú Unibanco', logo: '/logos/itau.svg', altura: 64 },
+  { nome: 'BTG Pactual', logo: '/logos/btg.svg', altura: 60 },
+  { nome: 'Softplan' },
+  { nome: 'BRQ Digital Solutions' },
+  { nome: 'IPDV' },
+  { nome: 'Droga Raia' },
+  { nome: 'Drogarias Pacheco', logo: '/logos/pacheco.svg', altura: 46 },
+  { nome: 'Oi', logo: '/logos/oi.svg', altura: 52 },
+  { nome: 'Rio Saúde' },
+  { nome: 'Exército Brasileiro' },
+  { nome: 'Marinha do Brasil' },
 ];
 
 export const ui: Record<Lang, Dict> = {

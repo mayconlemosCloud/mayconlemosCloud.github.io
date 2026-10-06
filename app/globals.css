@@ -712,11 +712,31 @@ a {
   animation-play-state: paused;
 }
 .marquee-item {
+  display: flex;
+  align-items: center;
   font-family: var(--font-display);
   font-size: clamp(22px, 2.6vw, 30px);
   color: var(--ink-muted);
   white-space: nowrap;
   opacity: 0.75;
+}
+.marquee-item img {
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.7;
+  transition: filter 0.3s, opacity 0.3s;
+}
+.marquee-item img:hover {
+  filter: none;
+  opacity: 1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .marquee-item img {
+    filter: grayscale(1) invert(1) brightness(1.4);
+  }
+}
+:root[data-theme='dark'] .marquee-item img {
+  filter: grayscale(1) invert(1) brightness(1.4);
 }
 @keyframes marquee {
   to {
@@ -726,6 +746,7 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation: none;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: center;
     width: auto;
