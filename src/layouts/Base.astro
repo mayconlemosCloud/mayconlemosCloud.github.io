@@ -1,28 +1,38 @@
 ---
 import '../styles/global.css';
+import { langs, langLabel, htmlLang, localize, ui, type Lang } from '../i18n/ui';
 
 interface Props {
+  lang: Lang;
+  /** Caminho sem prefixo de idioma, ex.: "/" ou "/cases/x/" */
+  path: string;
   title: string;
   description: string;
   image?: string;
 }
 
-const { title, description, image = '/fotos/cena1-bracos-cruzados-bege.webp' } = Astro.props;
+const { lang, path, title, description, image = '/fotos/cena1-bracos-cruzados-bege.webp' } = Astro.props;
+const t = ui[lang];
 const ogImage = new URL(image, Astro.site);
+const home = localize('/', lang);
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang={htmlLang[lang]} data-lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href={new URL(localize(path, lang), Astro.site)} />
+    {langs.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={new URL(localize(path, l), Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(path, Astro.site)} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={htmlLang[lang].replace('-', '_')} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,17 +40,53 @@ const ogImage = new URL(image, Astro.site);
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      // Idioma automático: só na primeira visita, só nas páginas em português (sem prefixo)
+      // e só se o visitante ainda não escolheu um idioma. Links compartilhados em /en ou /fr são respeitados.
+      (function () {
+        try {
+          if (document.documentElement.dataset.lang !== 'pt') return;
+          if (localStorage.getItem('lang')) return;
+          var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+          var want = 'en';
+          for (var i = 0; i < prefs.length; i++) {
+            var code = String(prefs[i] || '').slice(0, 2).toLowerCase();
+            if (code === 'pt' || code === 'en' || code === 'fr') {
+              want = code;
+              break;
+            }
+          }
+          if (want !== 'pt') location.replace('/' + want + location.pathname + location.hash);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <header class="topbar">
       <div class="wrap topbar-inner">
-        <a href="/" class="brand">Maycon Lemos</a>
+        <a href={home} class="brand">Maycon Lemos</a>
         <nav aria-label="Principal">
-          <a href="/#cases">Cases</a>
-          <a href="/#como-trabalho">Como eu trabalho</a>
-          <a href="/#agora">Agora</a>
-          <a href="/#contato">Contato</a>
+          <a href={`${home}#cases`}>{t.nav.cases}</a>
+          <a href={`${home}#experiencia`}>{t.nav.experiencia}</a>
+          <a href={`${home}#como-trabalho`}>{t.nav.comoTrabalho}</a>
+          <a href={`${home}#agora`}>{t.nav.agora}</a>
+          <a href={`${home}#contato`}>{t.nav.contato}</a>
         </nav>
+        <div class="lang-switch" role="group" aria-label={t.idioma}>
+          {
+            langs.map((l) => (
+              <a
+                href={localize(path, l)}
+                hreflang={htmlLang[l]}
+                lang={htmlLang[l]}
+                data-set-lang={l}
+                aria-current={l === lang ? 'true' : undefined}
+              >
+                {langLabel[l]}
+              </a>
+            ))
+          }
+        </div>
       </div>
     </header>
     <main>
@@ -49,9 +95,18 @@ const ogImage = new URL(image, Astro.site);
     <footer class="footer">
       <div class="wrap footer-inner">
         <span>© {new Date().getFullYear()} Maycon Lemos</span>
-        <span>Feito com Astro · publicado no GitHub Pages</span>
+        <span>{t.footer}</span>
       </div>
     </footer>
+    <script is:inline>
+      document.querySelectorAll('[data-set-lang]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          try {
+            localStorage.setItem('lang', a.getAttribute('data-set-lang'));
+          } catch (e) {}
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -67,18 +122,18 @@ const ogImage = new URL(image, Astro.site);
   .topbar-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     height: 64px;
-    gap: 16px;
+    gap: 24px;
   }
   .brand {
     font-family: var(--font-display);
     font-size: 20px;
     text-decoration: none;
+    margin-right: auto;
   }
   nav {
     display: flex;
-    gap: 24px;
+    gap: 22px;
     font-size: 15px;
   }
   nav a {
@@ -87,6 +142,29 @@ const ogImage = new URL(image, Astro.site);
   }
   nav a:hover {
     color: var(--ink);
+  }
+  .lang-switch {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px;
+    background: var(--surface);
+  }
+  .lang-switch a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--ink-muted);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .lang-switch a:hover {
+    color: var(--ink);
+  }
+  .lang-switch a[aria-current='true'] {
+    background: var(--ink);
+    color: var(--bg);
   }
   .footer {
     border-top: 1px solid var(--line);
@@ -100,7 +178,7 @@ const ogImage = new URL(image, Astro.site);
     flex-wrap: wrap;
     gap: 8px;
   }
-  @media (max-width: 720px) {
+  @media (max-width: 900px) {
     nav {
       display: none;
     }
