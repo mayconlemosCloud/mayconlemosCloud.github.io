@@ -1,4 +1,4 @@
-import type { Lang } from '../i18n/ui';
+import type { Lang } from './i18n';
 
 // Conteúdo dos cases nos três idiomas. Campos de "resultados" dependem de números
 // reais que só o Maycon tem — não inventar métricas.
