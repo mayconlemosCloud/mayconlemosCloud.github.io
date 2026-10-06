@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { getCases } from '@/lib/cases';
-import { ui, links, localize, chips, empresas, whatsappUrl, type Lang } from '@/lib/i18n';
+import { ui, links, chips, empresas, whatsappUrl, type Lang } from '@/lib/i18n';
 import WhatsAppIcon from './WhatsAppIcon';
 
 function iniciais(nome: string) {
@@ -133,23 +132,16 @@ export default function Home({ lang }: { lang: Lang }) {
           <ol className="cases">
             {cases.map((c) => (
               <li className="case" key={c.slug}>
-                <Link href={localize(`/cases/${c.slug}/`, lang)} className="case-link">
+                <a href={c.repo} target="_blank" rel="noopener" className="case-link">
                   <span className="case-num">{c.numero}</span>
                   <div className="case-body">
                     <h3 className="display case-title">{c.titulo}</h3>
                     <p className="case-resumo">{c.resumo}</p>
-                    <div className="case-stack">
-                      {c.stack.map((s) => (
-                        <span className="chip" key={s}>
-                          {s}
-                        </span>
-                      ))}
-                    </div>
                   </div>
                   <span className="case-arrow" aria-hidden="true">
-                    →
+                    ↗
                   </span>
-                </Link>
+                </a>
               </li>
             ))}
           </ol>
