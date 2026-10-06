@@ -10,6 +10,7 @@ export const links = {
   github: 'https://github.com/mayconlemosCloud',
   // Número do currículo: (21) 99791-3361
   whatsapp: '5521997913361',
+  recomendacoes: 'https://www.linkedin.com/in/mayconlemos/details/recommendations/',
 };
 
 export function whatsappUrl(mensagem: string): string {
@@ -44,9 +45,11 @@ export interface Dict {
     titulo: string;
     nota?: string;
     recomendacoes: { texto: string; nome: string; cargo: string }[];
-    retroTitulo: string;
-    retro: string[];
-    retroFonte: string;
+    verLinkedin: string;
+    printsTitulo: string;
+    legendas: { retro: string; teams: string };
+    printsAlt: string[];
+    printsNota: string;
   };
   formacao: { eyebrow: string; titulo: string; itens: { emissor: string; titulo: string; detalhe: string }[] };
   cases: { eyebrow: string; titulo: string };
@@ -74,6 +77,18 @@ export interface Dict {
 
 const chips = ['.NET / C#', 'Node.js', 'React / Next.js', 'Angular', 'Kafka / RabbitMQ', 'AWS / Azure', 'RAG / GraphRAG', 'MCP / Multi-agent', 'Temporal'];
 export { chips };
+
+// Prints de reconhecimento (recortados; nomes e fotos de colegas desfocados). A ordem casa com depoimentos.printsAlt.
+export const prints: { src: string; tipo: 'retro' | 'teams'; largura: number; altura: number }[] = [
+  { src: '/reconhecimento/teams-arrasou.webp', tipo: 'teams', largura: 660, altura: 185 },
+  { src: '/reconhecimento/retro-senso-de-dono.webp', tipo: 'retro', largura: 370, altura: 53 },
+  { src: '/reconhecimento/retro-inclusao.webp', tipo: 'retro', largura: 458, altura: 63 },
+  { src: '/reconhecimento/teams-parceria.webp', tipo: 'teams', largura: 1195, altura: 183 },
+  { src: '/reconhecimento/retro-prestativo.webp', tipo: 'retro', largura: 386, altura: 82 },
+  { src: '/reconhecimento/retro-testes-ab.webp', tipo: 'retro', largura: 519, altura: 64 },
+  { src: '/reconhecimento/teams-parabens.webp', tipo: 'teams', largura: 788, altura: 182 },
+  { src: '/reconhecimento/retro-parceiro.webp', tipo: 'retro', largura: 464, altura: 80 },
+];
 
 // Empresas e clientes por onde passou. Logos oficiais (SVG do Wikimedia Commons) quando disponíveis;
 // as demais aparecem como texto. Exército e Marinha ficam em texto: símbolos das Forças Armadas têm uso restrito.
@@ -121,15 +136,20 @@ export const ui: Record<Lang, Dict> = {
         { texto: 'O Maycon é um profissional exemplar, com conhecimento técnico de alto nível, e se dá bem tanto no front-end como no back-end [...]. Um verdadeiro full-stack. Além disso, possui um excelente relacionamento interpessoal [...]. Autodidata, proativo e sem medo de enfrentar os desafios diários.', nome: 'Marcelo Kiilian Heinsberg', cargo: 'Senior Software Engineer · Itaú Unibanco' },
         { texto: 'Grande Maycon, um dos profissionais mais capacitados que já conheci. Não se conforma em apenas fazer entregas, mas se envolve e entende todos os fluxos do projeto, atuando em várias frentes, como front e back, demonstrando sua alta capacidade técnica.', nome: 'Josemalyson Oliveira', cargo: 'Staff Engineer · Zup Innovation' },
       ],
-      retroTitulo: 'Nas retrospectivas do time',
-      retro: [
-        'Senso de dono e apetite pela evolução.',
-        'Por dar espaço e oportunidade para as pessoas participarem das discussões e decisões (inclusão).',
-        'Prestativo em ajudar com problemas que eu estava tendo, muito obrigado!',
-        'Me apoiando nos testes A/B.',
-        'Agradeço ao meu parceiro Maycon pela colaboração na atividade.',
+      verLinkedin: 'Ver no LinkedIn',
+      printsTitulo: 'Prints reais do dia a dia',
+      legendas: { retro: 'Retrospectiva do time · Itaú', teams: 'Chat da demo de sprint · Teams · Itaú' },
+      printsAlt: [
+        'Mensagem no chat da demo: Parabéns, Maycon! Arrasou!',
+        'Card de retrospectiva: Maycon pelo senso de dono e apetite na evolução',
+        'Card de retrospectiva: ao Maycon por dar espaço e oportunidade para as pessoas participarem das discussões e decisões (inclusão)',
+        'Mensagem no chat da demo: Maycon, muito obrigada pela parceria! Muito sucesso para você e conte comigo sempre',
+        'Card de retrospectiva: Maycão prestativo em ajudar com problemas que eu estava tendo, muito obrigadão!',
+        'Card de retrospectiva: Maycon me apoiando nos testes A/B',
+        'Mensagem no chat da demo: Maycon, PARABÉNS!',
+        'Card de retrospectiva: Agradeço ao meu parceiro Maycon pela colaboração na atividade',
       ],
-      retroFonte: 'Retrospectivas anônimas de squad · Itaú',
+      printsNota: 'Nomes e fotos de colegas foram desfocados para preservar a privacidade.',
     },
     formacao: {
       eyebrow: 'Formação',
@@ -273,15 +293,20 @@ export const ui: Record<Lang, Dict> = {
         { texto: 'Maycon is an exemplary professional with high-level technical knowledge, equally at home on the front end and the back end [...]. A true full-stack developer. He also has excellent interpersonal skills [...]. Self-taught, proactive and unafraid of everyday challenges.', nome: 'Marcelo Kiilian Heinsberg', cargo: 'Senior Software Engineer · Itaú Unibanco' },
         { texto: 'One of the most capable professionals I have ever met. He is not satisfied with just delivering: he gets involved and understands every flow of the project, working on several fronts, front and back, showing great technical ability.', nome: 'Josemalyson Oliveira', cargo: 'Staff Engineer · Zup Innovation' },
       ],
-      retroTitulo: 'From team retrospectives',
-      retro: [
-        'Sense of ownership and an appetite for growth.',
-        'For giving people room and the chance to take part in discussions and decisions (inclusion).',
-        'Always willing to help with the problems I was facing. Thank you so much!',
-        'Backing me up on the A/B tests.',
-        'Thanks to my partner Maycon for the collaboration on this task.',
+      verLinkedin: 'See on LinkedIn',
+      printsTitulo: 'Real screenshots from day-to-day work',
+      legendas: { retro: 'Team retrospective · Itaú', teams: 'Sprint demo chat · Teams · Itaú' },
+      printsAlt: [
+        'Demo chat message: Congratulations, Maycon! You nailed it!',
+        'Retrospective card: Maycon for his sense of ownership and appetite for growth',
+        'Retrospective card: to Maycon for giving people room and the chance to take part in discussions and decisions (inclusion)',
+        'Demo chat message: Maycon, thank you so much for the partnership! Wishing you every success, count on me always',
+        'Retrospective card: Maycon always willing to help with the problems I was facing, thank you so much!',
+        'Retrospective card: Maycon backing me up on the A/B tests',
+        'Demo chat message: Maycon, CONGRATULATIONS!',
+        'Retrospective card: Thanks to my partner Maycon for the collaboration on this task',
       ],
-      retroFonte: 'Anonymous squad retrospectives · Itaú',
+      printsNota: 'Screenshots in Portuguese. Colleagues’ names and photos were blurred for privacy.',
     },
     formacao: {
       eyebrow: 'Education',
@@ -425,15 +450,20 @@ export const ui: Record<Lang, Dict> = {
         { texto: 'Maycon est un professionnel exemplaire, avec des connaissances techniques de haut niveau, aussi à l’aise en front-end qu’en back-end [...]. Un vrai full stack. Il a aussi un excellent relationnel [...]. Autodidacte, proactif et sans peur face aux défis du quotidien.', nome: 'Marcelo Kiilian Heinsberg', cargo: 'Senior Software Engineer · Itaú Unibanco' },
         { texto: 'L’un des professionnels les plus compétents que j’aie rencontrés. Il ne se contente pas de livrer : il s’implique et comprend tous les flux du projet, en intervenant sur plusieurs fronts, front et back, avec une grande capacité technique.', nome: 'Josemalyson Oliveira', cargo: 'Staff Engineer · Zup Innovation' },
       ],
-      retroTitulo: 'Lors des rétrospectives d’équipe',
-      retro: [
-        'Sens des responsabilités et envie d’évoluer.',
-        'Pour avoir donné à chacun l’espace et l’occasion de participer aux discussions et aux décisions (inclusion).',
-        'Toujours prêt à aider sur les problèmes que je rencontrais, merci beaucoup !',
-        'Pour son soutien sur les tests A/B.',
-        'Merci à mon partenaire Maycon pour sa collaboration sur cette tâche.',
+      verLinkedin: 'Voir sur LinkedIn',
+      printsTitulo: 'De vraies captures du quotidien',
+      legendas: { retro: 'Rétrospective d’équipe · Itaú', teams: 'Chat de la démo de sprint · Teams · Itaú' },
+      printsAlt: [
+        'Message dans le chat de la démo : Bravo, Maycon ! Tu as assuré !',
+        'Carte de rétrospective : Maycon pour son sens des responsabilités et son envie d’évoluer',
+        'Carte de rétrospective : à Maycon pour avoir donné à chacun l’espace de participer aux discussions et aux décisions (inclusion)',
+        'Message dans le chat de la démo : Maycon, merci beaucoup pour ce partenariat ! Plein de succès, tu peux toujours compter sur moi',
+        'Carte de rétrospective : Maycon toujours prêt à aider sur les problèmes que je rencontrais, merci beaucoup !',
+        'Carte de rétrospective : Maycon m’a soutenu sur les tests A/B',
+        'Message dans le chat de la démo : Maycon, FÉLICITATIONS !',
+        'Carte de rétrospective : Merci à mon partenaire Maycon pour sa collaboration sur cette tâche',
       ],
-      retroFonte: 'Rétrospectives anonymes d’équipe · Itaú',
+      printsNota: 'Captures en portugais. Les noms et photos des collègues ont été floutés par respect de la vie privée.',
     },
     formacao: {
       eyebrow: 'Formation',
