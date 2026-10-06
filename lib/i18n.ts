@@ -74,8 +74,8 @@ export const ui: Record<Lang, Dict> = {
     nav: { cases: 'Cases', experiencia: 'Experiência', comoTrabalho: 'Como eu trabalho', agora: 'Agora', contato: 'Contato' },
     hero: {
       eyebrow: 'AI-Native Software Engineer · .NET & IA · +15 anos',
-      titulo: 'Engenheiro de software há mais de 15 anos. Hoje construo produtos em que a IA faz parte do fluxo.',
-      sub: 'Base sólida em plataformas bancárias e do setor público — Itaú, BTG Pactual e Softplan —, de microsserviços orientados a eventos a RAG e agentes de IA em produção.',
+      titulo: 'Sua ideia com IA, pronta para o mundo real.',
+      sub: 'Da arquitetura à interface: mais de 15 anos de .NET, microsserviços e plataformas bancárias, agora a serviço de produtos com IA.',
       verCases: 'Ver cases',
       fotoAlt: 'Maycon Lemos de braços cruzados, sorrindo e olhando para o alto',
     },
@@ -197,8 +197,8 @@ export const ui: Record<Lang, Dict> = {
     nav: { cases: 'Work', experiencia: 'Experience', comoTrabalho: 'How I work', agora: 'Now', contato: 'Contact' },
     hero: {
       eyebrow: 'AI-Native Software Engineer · .NET & AI · 15+ years',
-      titulo: 'Software engineer for over 15 years. Today I build products where AI is part of the flow.',
-      sub: 'A solid background in banking and public-sector platforms — Itaú, BTG Pactual and Softplan — from event-driven microservices to RAG and AI agents in production.',
+      titulo: 'Your AI idea, ready for the real world.',
+      sub: 'From architecture to interface: 15+ years of .NET, microservices and banking platforms, now in service of AI products.',
       verCases: 'See case studies',
       fotoAlt: 'Maycon Lemos with arms crossed, smiling and looking up',
     },
@@ -320,8 +320,8 @@ export const ui: Record<Lang, Dict> = {
     nav: { cases: 'Projets', experiencia: 'Expérience', comoTrabalho: 'Ma méthode', agora: 'En ce moment', contato: 'Contact' },
     hero: {
       eyebrow: 'AI-Native Software Engineer · .NET & IA · +15 ans',
-      titulo: 'Ingénieur logiciel depuis plus de 15 ans. Aujourd’hui, je construis des produits où l’IA fait partie du flux.',
-      sub: 'Une solide expérience des plateformes bancaires et du secteur public — Itaú, BTG Pactual et Softplan —, des microservices orientés événements au RAG et aux agents d’IA en production.',
+      titulo: 'Votre idée avec l’IA, prête pour le monde réel.',
+      sub: 'De l’architecture à l’interface : plus de 15 ans de .NET, de microservices et de plateformes bancaires, désormais au service de produits d’IA.',
       verCases: 'Voir les projets',
       fotoAlt: 'Maycon Lemos, bras croisés, souriant et regardant vers le haut',
     },
