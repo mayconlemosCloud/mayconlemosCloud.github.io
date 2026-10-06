@@ -27,115 +27,130 @@ export type Case = Omit<CaseBase, 'texto'> & CaseTexto;
 
 const base: CaseBase[] = [
   {
+    // Mesmo endereço do case antigo, para não quebrar links já publicados.
     slug: 'traducao-tempo-real-ia',
     numero: '01',
-    stack: ['.NET 8/9', 'WPF', 'NAudio / WASAPI', 'Gemini Live', 'OpenAI Realtime', 'Azure Speech'],
-    repo: 'https://github.com/mayconlemosCloud/Traducao-RealTime-.NET8-AzureAi-Gemini-OpenAI',
-    demo: 'https://www.youtube.com/watch?v=5ARUsHx-Epc',
+    stack: ['.NET 10', 'WPF', 'NAudio / WASAPI', 'Gemini Live API', 'Arquitetura hexagonal', 'Testes do núcleo'],
+    repo: 'https://github.com/mayconlemosCloud/gemini-live-voice',
     texto: {
       pt: {
-        titulo: 'Tradução de reuniões em tempo real com três provedores de IA',
+        titulo: 'Tradutor de reuniões voz a voz em tempo real com Gemini Live',
         resumo:
-          'Um app desktop que escuta a reunião e traduz voz para voz. Comparei Azure Speech, OpenAI Realtime e Gemini Live para descobrir qual entrega a melhor latência e qualidade para conversa ao vivo.',
+          'App desktop que traduz reuniões no Teams, Meet ou Zoom nos dois sentidos: você ouve o outro em português e ele te ouve em inglês, com tradução nativa voz a voz e baixa latência.',
         problema:
-          'Em reunião, tradução que chega dois segundos depois já não serve: a conversa seguiu. O desafio não era “chamar uma API de IA”, era capturar o áudio do sistema e do microfone, manter o fluxo contínuo e devolver voz traduzida rápido o bastante para não quebrar o diálogo.',
+          'Tradução que chega atrasada quebra a conversa. E uma API de áudio em tempo real cobra cada segundo que escuta, inclusive o silêncio. O desafio era traduzir nos dois sentidos ao mesmo tempo, sem eco, sem a própria tradução voltar para a reunião e sem a conta crescer à toa.',
         arquitetura: [
-          'Captura de áudio por loopback (WASAPI) — traduz o que os outros falam, não só o microfone.',
-          'Camada de provedores intercambiável: Azure Speech, OpenAI Realtime e Gemini Live atrás da mesma interface.',
-          'Streaming bidirecional via WebSocket com o Gemini Live, recebendo áudio nativo de volta (evoluído depois no projeto gemini-live-voice).',
-          'Janela flutuante sempre no topo, para usar junto com Teams, Zoom ou Meet.',
-          'MVVM no WPF para separar captura, tradução e interface.',
+          'Duas sessões independentes da Live API em paralelo: entrada (áudio da reunião → português no seu fone) e saída (seu microfone → inglês num microfone virtual que o Teams ou o Meet escutam).',
+          'Tradução nativa voz a voz, sem transcrever e sintetizar: áudio PCM de 16 kHz na entrada e 24 kHz na saída, em blocos de cerca de 100 ms.',
+          'Arquitetura hexagonal em quatro projetos: o núcleo não referencia NAudio, HTTP nem WPF, e o compilador impede que esse acoplamento volte.',
+          'Processamento de sinal testável no núcleo: ganho automático sem distorção, aceleração sem alterar o tom (WSOLA) e medição de atraso por correlação.',
+          'Sessões contínuas: retomada de contexto nas reconexões e renovação da conexão antes do corte do servidor.',
         ],
         decisoes: [
           {
-            titulo: 'Abstrair o provedor desde o primeiro dia',
+            titulo: 'Portão de silêncio para cortar custo',
             texto:
-              'Cada provedor tem pontos fortes diferentes em latência, custo e qualidade de voz. Isolar a integração atrás de uma interface permitiu comparar os três com o mesmo áudio, em vez de escolher no escuro.',
+              'A API cobra cerca de 25 tokens por segundo enquanto escuta, inclusive em silêncio. Quando a captura entrega 2 segundos de amostras exatamente zero, o app encerra o stream e reabre no primeiro sinal, sem perder fala nem cortar as pausas naturais.',
           },
           {
-            titulo: 'Áudio para áudio, sem passar por texto',
+            titulo: 'Anti-eco no roteamento de áudio',
             texto:
-              'O caminho clássico (fala → texto → tradução → voz) soma três latências. Com o Gemini Live o modelo recebe áudio e devolve áudio, eliminando etapas intermediárias.',
+              'Enquanto você fala, e enquanto a sua tradução ainda toca na reunião, a captura da reunião pausa. A tradução recebida é abaixada para cerca de 15% com o seu microfone aberto, para não vazar e ser traduzida de novo.',
           },
           {
-            titulo: 'Desktop nativo em vez de web',
+            titulo: 'Compressão de contexto explícita',
             texto:
-              'Capturar o áudio do sistema por loopback não é possível no navegador sem gambiarra. WPF com NAudio dá acesso direto ao WASAPI.',
+              'Configurei a compressão da janela de contexto para disparar em cerca de 10 minutos de áudio, segurando o custo de reuniões longas em vez de depender do padrão do servidor.',
+          },
+          {
+            titulo: 'Núcleo isolado por portas e adaptadores',
+            texto:
+              'Captura, tradução e interface ficam atrás de interfaces. Isso permite testar a lógica de áudio sem hardware nem rede e trocar o provedor de IA sem mexer no núcleo.',
           },
         ],
         aprendizados: [
-          'Em IA em tempo real, latência é requisito de produto, não detalhe técnico.',
-          'Comparar provedores com o mesmo áudio de teste vale mais que benchmark de marketing.',
+          'Em IA de voz em tempo real, custo e latência são decisões de arquitetura, não ajustes no final.',
+          'O modelo ainda é preview: a voz pode oscilar depois de pausas longas e a detecção de idioma falha com sotaques fortes. Por isso o app registra cada sessão em log, para diagnosticar rápido.',
         ],
       },
       en: {
-        titulo: 'Real-time meeting translation with three AI providers',
+        titulo: 'Real-time voice-to-voice meeting translator with Gemini Live',
         resumo:
-          'A desktop app that listens to a meeting and translates voice to voice. I compared Azure Speech, OpenAI Realtime and Gemini Live to find which delivers the best latency and quality for live conversation.',
+          'A desktop app that translates Teams, Meet or Zoom meetings in both directions: you hear the other person in Portuguese and they hear you in English, with native voice-to-voice translation and low latency.',
         problema:
-          'In a meeting, a translation that arrives two seconds late is useless: the conversation has moved on. The challenge was not “calling an AI API” — it was capturing system and microphone audio, keeping the stream continuous and returning translated speech fast enough not to break the dialogue.',
+          'A translation that arrives late breaks the conversation. And a real-time audio API charges for every second it listens, silence included. The challenge was to translate both ways at once, without echo, without your own translation leaking back into the meeting, and without the bill growing for nothing.',
         arquitetura: [
-          'Loopback audio capture (WASAPI) — translates what other people say, not just the microphone.',
-          'Pluggable provider layer: Azure Speech, OpenAI Realtime and Gemini Live behind the same interface.',
-          'Bidirectional WebSocket streaming with Gemini Live, receiving native audio back (later evolved in the gemini-live-voice project).',
-          'Always-on-top floating window, to use alongside Teams, Zoom or Meet.',
-          'MVVM in WPF to separate capture, translation and UI.',
+          'Two independent Live API sessions in parallel: inbound (meeting audio → Portuguese in your headphones) and outbound (your microphone → English on a virtual microphone that Teams or Meet listens to).',
+          'Native voice-to-voice translation, no transcribe-then-synthesize: 16 kHz PCM in and 24 kHz PCM out, sent in roughly 100 ms chunks.',
+          'Hexagonal architecture across four projects: the core references neither NAudio, HTTP nor WPF, and the compiler keeps that coupling from creeping back.',
+          'Testable signal processing in the core: clip-free automatic gain, pitch-preserving speed-up (WSOLA) and delay measurement by correlation.',
+          'Continuous sessions: context resumption on reconnect and connection renewal before the server cuts it off.',
         ],
         decisoes: [
           {
-            titulo: 'Abstract the provider from day one',
+            titulo: 'A silence gate to cut cost',
             texto:
-              'Each provider has different strengths in latency, cost and voice quality. Isolating the integration behind an interface let me compare all three with the same audio instead of choosing blindly.',
+              'The API charges about 25 tokens per second while listening, silence included. When capture delivers 2 seconds of exactly-zero samples, the app closes the stream and reopens on the first signal, without losing speech or cutting natural pauses.',
           },
           {
-            titulo: 'Audio to audio, skipping text',
+            titulo: 'Anti-echo audio routing',
             texto:
-              'The classic path (speech → text → translation → speech) adds up three latencies. With Gemini Live the model takes audio in and returns audio, removing intermediate steps.',
+              'While you speak, and while your translation is still playing in the meeting, meeting capture pauses. Incoming translation is ducked to about 15% while your microphone is open, so it does not leak and get translated again.',
           },
           {
-            titulo: 'Native desktop instead of web',
+            titulo: 'Explicit context compression',
             texto:
-              'Capturing system audio through loopback is not possible in the browser without hacks. WPF with NAudio gives direct access to WASAPI.',
+              'I configured context-window compression to trigger at about 10 minutes of audio, keeping long meetings affordable instead of relying on the server default.',
+          },
+          {
+            titulo: 'Core isolated by ports and adapters',
+            texto:
+              'Capture, translation and UI sit behind interfaces. That makes the audio logic testable without hardware or network and lets the AI provider change without touching the core.',
           },
         ],
         aprendizados: [
-          'In real-time AI, latency is a product requirement, not a technical detail.',
-          'Comparing providers with the same test audio is worth more than any marketing benchmark.',
+          'In real-time voice AI, cost and latency are architecture decisions, not last-minute tweaks.',
+          'The model is still in preview: the voice can drift after long pauses and language detection struggles with strong accents. That is why the app logs every session, for fast diagnosis.',
         ],
       },
       fr: {
-        titulo: 'Traduction de réunions en temps réel avec trois fournisseurs d’IA',
+        titulo: 'Traducteur de réunions voix à voix en temps réel avec Gemini Live',
         resumo:
-          'Une application desktop qui écoute la réunion et traduit de la voix vers la voix. J’ai comparé Azure Speech, OpenAI Realtime et Gemini Live pour savoir lequel offre la meilleure latence et la meilleure qualité en conversation directe.',
+          'Une application desktop qui traduit les réunions Teams, Meet ou Zoom dans les deux sens : vous entendez l’autre en portugais et il vous entend en anglais, avec une traduction native voix à voix et une faible latence.',
         problema:
-          'En réunion, une traduction qui arrive avec deux secondes de retard ne sert plus à rien : la conversation a avancé. Le défi n’était pas d’« appeler une API d’IA », mais de capturer l’audio du système et du micro, de garder un flux continu et de restituer la voix traduite assez vite pour ne pas casser le dialogue.',
+          'Une traduction qui arrive en retard casse la conversation. Et une API audio temps réel facture chaque seconde d’écoute, silence compris. Le défi : traduire dans les deux sens en même temps, sans écho, sans que votre propre traduction revienne dans la réunion et sans faire grimper la facture inutilement.',
         arquitetura: [
-          'Capture audio en loopback (WASAPI) — traduit ce que disent les autres, pas seulement le micro.',
-          'Couche de fournisseurs interchangeable : Azure Speech, OpenAI Realtime et Gemini Live derrière la même interface.',
-          'Streaming bidirectionnel via WebSocket avec Gemini Live, avec retour audio natif (repris ensuite dans le projet gemini-live-voice).',
-          'Fenêtre flottante toujours au premier plan, à utiliser avec Teams, Zoom ou Meet.',
-          'MVVM en WPF pour séparer capture, traduction et interface.',
+          'Deux sessions indépendantes de la Live API en parallèle : entrée (audio de la réunion → portugais dans votre casque) et sortie (votre micro → anglais sur un micro virtuel écouté par Teams ou Meet).',
+          'Traduction native voix à voix, sans transcription ni synthèse : PCM 16 kHz en entrée et 24 kHz en sortie, envoyé par blocs d’environ 100 ms.',
+          'Architecture hexagonale sur quatre projets : le cœur ne référence ni NAudio, ni HTTP, ni WPF, et le compilateur empêche ce couplage de revenir.',
+          'Traitement du signal testable dans le cœur : gain automatique sans saturation, accélération sans changer la hauteur (WSOLA) et mesure du retard par corrélation.',
+          'Sessions continues : reprise du contexte à la reconnexion et renouvellement de la connexion avant la coupure du serveur.',
         ],
         decisoes: [
           {
-            titulo: 'Abstraire le fournisseur dès le premier jour',
+            titulo: 'Une porte de silence pour réduire les coûts',
             texto:
-              'Chaque fournisseur a ses points forts en latence, coût et qualité de voix. Isoler l’intégration derrière une interface m’a permis de comparer les trois avec le même audio, au lieu de choisir à l’aveugle.',
+              'L’API facture environ 25 tokens par seconde d’écoute, silence compris. Quand la capture livre 2 secondes d’échantillons exactement nuls, l’application ferme le flux et le rouvre au premier signal, sans perdre de parole ni couper les pauses naturelles.',
           },
           {
-            titulo: 'De l’audio à l’audio, sans passer par le texte',
+            titulo: 'Routage audio anti-écho',
             texto:
-              'Le chemin classique (parole → texte → traduction → parole) additionne trois latences. Avec Gemini Live, le modèle reçoit de l’audio et renvoie de l’audio, ce qui supprime les étapes intermédiaires.',
+              'Pendant que vous parlez, et tant que votre traduction joue encore dans la réunion, la capture de la réunion est en pause. La traduction reçue est abaissée à environ 15 % quand votre micro est ouvert, pour ne pas être retraduite.',
           },
           {
-            titulo: 'Desktop natif plutôt que web',
+            titulo: 'Compression de contexte explicite',
             texto:
-              'Capturer l’audio du système en loopback n’est pas possible dans le navigateur sans bricolage. WPF avec NAudio donne un accès direct à WASAPI.',
+              'J’ai configuré la compression de la fenêtre de contexte pour se déclencher vers 10 minutes d’audio, afin de maîtriser le coût des longues réunions au lieu de dépendre du réglage par défaut du serveur.',
+          },
+          {
+            titulo: 'Un cœur isolé par ports et adaptateurs',
+            texto:
+              'Capture, traduction et interface sont derrière des interfaces. La logique audio se teste sans matériel ni réseau, et le fournisseur d’IA peut changer sans toucher au cœur.',
           },
         ],
         aprendizados: [
-          'En IA temps réel, la latence est une exigence produit, pas un détail technique.',
-          'Comparer les fournisseurs avec le même audio de test vaut plus que n’importe quel benchmark marketing.',
+          'En IA vocale temps réel, le coût et la latence sont des décisions d’architecture, pas des réglages de dernière minute.',
+          'Le modèle est encore en préversion : la voix peut varier après de longues pauses et la détection de langue échoue avec des accents marqués. D’où la journalisation de chaque session, pour diagnostiquer vite.',
         ],
       },
     },
