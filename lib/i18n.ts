@@ -39,6 +39,15 @@ export interface Dict {
   hero: { eyebrow: string; titulo: string; sub: string; verCases: string; fotoAlt: string };
   video: { eyebrow: string; titulo: string; nota: string };
   empresas: { titulo: string };
+  depoimentos: {
+    eyebrow: string;
+    titulo: string;
+    nota?: string;
+    recomendacoes: { texto: string; nome: string; cargo: string }[];
+    retroTitulo: string;
+    retro: string[];
+    retroFonte: string;
+  };
   formacao: { eyebrow: string; titulo: string; itens: { emissor: string; titulo: string; detalhe: string }[] };
   cases: { eyebrow: string; titulo: string };
   experiencia: { eyebrow: string; titulo: string; itens: Experiencia[] };
@@ -105,6 +114,23 @@ export const ui: Record<Lang, Dict> = {
       fotoAlt: 'Maycon Lemos de braços cruzados, sorrindo e olhando para o alto',
     },
     empresas: { titulo: 'Empresas e projetos em que atuei' },
+    depoimentos: {
+      eyebrow: 'O que dizem sobre mim',
+      titulo: 'Quem trabalhou comigo.',
+      recomendacoes: [
+        { texto: 'O Maycon é um profissional exemplar, com conhecimento técnico de alto nível, e se dá bem tanto no front-end como no back-end [...]. Um verdadeiro full-stack. Além disso, possui um excelente relacionamento interpessoal [...]. Autodidata, proativo e sem medo de enfrentar os desafios diários.', nome: 'Marcelo Kiilian Heinsberg', cargo: 'Senior Software Engineer · Itaú Unibanco' },
+        { texto: 'Grande Maycon, um dos profissionais mais capacitados que já conheci. Não se conforma em apenas fazer entregas, mas se envolve e entende todos os fluxos do projeto, atuando em várias frentes, como front e back, demonstrando sua alta capacidade técnica.', nome: 'Josemalyson Oliveira', cargo: 'Staff Engineer · Zup Innovation' },
+      ],
+      retroTitulo: 'Nas retrospectivas do time',
+      retro: [
+        'Senso de dono e apetite pela evolução.',
+        'Por dar espaço e oportunidade para as pessoas participarem das discussões e decisões (inclusão).',
+        'Prestativo em ajudar com problemas que eu estava tendo, muito obrigado!',
+        'Me apoiando nos testes A/B.',
+        'Agradeço ao meu parceiro Maycon pela colaboração na atividade.',
+      ],
+      retroFonte: 'Retrospectivas anônimas de squad · Itaú',
+    },
     formacao: {
       eyebrow: 'Formação',
       titulo: 'Formação e certificações.',
@@ -239,6 +265,24 @@ export const ui: Record<Lang, Dict> = {
       fotoAlt: 'Maycon Lemos with arms crossed, smiling and looking up',
     },
     empresas: { titulo: 'Companies and projects I have worked on' },
+    depoimentos: {
+      eyebrow: 'What people say',
+      titulo: 'From the people I have worked with.',
+      nota: 'Quotes translated from Portuguese.',
+      recomendacoes: [
+        { texto: 'Maycon is an exemplary professional with high-level technical knowledge, equally at home on the front end and the back end [...]. A true full-stack developer. He also has excellent interpersonal skills [...]. Self-taught, proactive and unafraid of everyday challenges.', nome: 'Marcelo Kiilian Heinsberg', cargo: 'Senior Software Engineer · Itaú Unibanco' },
+        { texto: 'One of the most capable professionals I have ever met. He is not satisfied with just delivering: he gets involved and understands every flow of the project, working on several fronts, front and back, showing great technical ability.', nome: 'Josemalyson Oliveira', cargo: 'Staff Engineer · Zup Innovation' },
+      ],
+      retroTitulo: 'From team retrospectives',
+      retro: [
+        'Sense of ownership and an appetite for growth.',
+        'For giving people room and the chance to take part in discussions and decisions (inclusion).',
+        'Always willing to help with the problems I was facing. Thank you so much!',
+        'Backing me up on the A/B tests.',
+        'Thanks to my partner Maycon for the collaboration on this task.',
+      ],
+      retroFonte: 'Anonymous squad retrospectives · Itaú',
+    },
     formacao: {
       eyebrow: 'Education',
       titulo: 'Education and certifications.',
@@ -373,6 +417,24 @@ export const ui: Record<Lang, Dict> = {
       fotoAlt: 'Maycon Lemos, bras croisés, souriant et regardant vers le haut',
     },
     empresas: { titulo: 'Entreprises et projets sur lesquels j’ai travaillé' },
+    depoimentos: {
+      eyebrow: 'Ce qu’on dit de moi',
+      titulo: 'Ceux qui ont travaillé avec moi.',
+      nota: 'Citations traduites du portugais.',
+      recomendacoes: [
+        { texto: 'Maycon est un professionnel exemplaire, avec des connaissances techniques de haut niveau, aussi à l’aise en front-end qu’en back-end [...]. Un vrai full stack. Il a aussi un excellent relationnel [...]. Autodidacte, proactif et sans peur face aux défis du quotidien.', nome: 'Marcelo Kiilian Heinsberg', cargo: 'Senior Software Engineer · Itaú Unibanco' },
+        { texto: 'L’un des professionnels les plus compétents que j’aie rencontrés. Il ne se contente pas de livrer : il s’implique et comprend tous les flux du projet, en intervenant sur plusieurs fronts, front et back, avec une grande capacité technique.', nome: 'Josemalyson Oliveira', cargo: 'Staff Engineer · Zup Innovation' },
+      ],
+      retroTitulo: 'Lors des rétrospectives d’équipe',
+      retro: [
+        'Sens des responsabilités et envie d’évoluer.',
+        'Pour avoir donné à chacun l’espace et l’occasion de participer aux discussions et aux décisions (inclusion).',
+        'Toujours prêt à aider sur les problèmes que je rencontrais, merci beaucoup !',
+        'Pour son soutien sur les tests A/B.',
+        'Merci à mon partenaire Maycon pour sa collaboration sur cette tâche.',
+      ],
+      retroFonte: 'Rétrospectives anonymes d’équipe · Itaú',
+    },
     formacao: {
       eyebrow: 'Formation',
       titulo: 'Formation et certifications.',

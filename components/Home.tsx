@@ -4,6 +4,11 @@ import { getCases } from '@/lib/cases';
 import { ui, links, localize, chips, empresas, whatsappUrl, type Lang } from '@/lib/i18n';
 import WhatsAppIcon from './WhatsAppIcon';
 
+function iniciais(nome: string) {
+  const partes = nome.split(' ');
+  return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
+}
+
 export default function Home({ lang }: { lang: Lang }) {
   const t = ui[lang];
   const cases = getCases(lang);
@@ -126,6 +131,42 @@ export default function Home({ lang }: { lang: Lang }) {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section className="section" id="depoimentos">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">{t.depoimentos.eyebrow}</p>
+            <h2 className="display">{t.depoimentos.titulo}</h2>
+          </div>
+          <div className="recs">
+            {t.depoimentos.recomendacoes.map((r) => (
+              <figure className="rec" key={r.nome}>
+                <blockquote>“{r.texto}”</blockquote>
+                <figcaption>
+                  <span className="rec-avatar" aria-hidden="true">
+                    {iniciais(r.nome)}
+                  </span>
+                  <span>
+                    <strong>{r.nome}</strong>
+                    <span className="rec-cargo">{r.cargo}</span>
+                  </span>
+                  <span className="rec-fonte">LinkedIn</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <h3 className="retro-titulo">{t.depoimentos.retroTitulo}</h3>
+          <ul className="retro">
+            {t.depoimentos.retro.map((r) => (
+              <li key={r}>“{r}”</li>
+            ))}
+          </ul>
+          <p className="retro-fonte">
+            {t.depoimentos.retroFonte}
+            {t.depoimentos.nota && <> · {t.depoimentos.nota}</>}
+          </p>
         </div>
       </section>
 
