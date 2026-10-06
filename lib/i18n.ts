@@ -6,8 +6,7 @@ export const htmlLang: Record<Lang, string> = { pt: 'pt-BR', en: 'en', fr: 'fr' 
 export const langLabel: Record<Lang, string> = { pt: 'PT', en: 'EN', fr: 'FR' };
 
 export const links = {
-  // TODO (Maycon): confirmar qual URL do LinkedIn é a atual (o currículo usa /in/mayconlemos).
-  linkedin: 'https://www.linkedin.com/in/mayconlemostech',
+  linkedin: 'https://www.linkedin.com/in/mayconlemos',
   github: 'https://github.com/mayconlemosCloud',
 };
 
