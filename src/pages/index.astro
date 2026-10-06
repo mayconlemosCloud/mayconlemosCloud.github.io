@@ -1,0 +1,458 @@
+---
+import Base from '../layouts/Base.astro';
+import { cases } from '../data/cases';
+
+const linkedin = 'https://www.linkedin.com/in/mayconlemostech';
+const github = 'https://github.com/mayconlemosCloud';
+
+const principios = [
+  {
+    titulo: 'Começo pelo problema, não pela stack',
+    texto:
+      'Microsserviço, fila e IA são ferramentas. Antes de escolher, pergunto o que acontece se der errado, quanto custa e quem vai manter.',
+  },
+  {
+    titulo: 'Nem tudo precisa ser microsserviço',
+    texto:
+      'Um monólito bem dividido resolve a maioria dos casos. Separo serviços quando há motivo concreto: escala diferente, time diferente ou falha que precisa ser isolada.',
+  },
+  {
+    titulo: 'IA entra com orçamento de latência e custo',
+    texto:
+      'Antes de plugar um modelo, defino quanto tempo o usuário pode esperar e quanto cada chamada pode custar. Isso decide o provedor, o cache e se a chamada é síncrona ou não.',
+  },
+  {
+    titulo: 'Legado se moderniza por partes',
+    texto:
+      'Reescrever do zero quase sempre atrasa. Prefiro estrangular o sistema antigo aos poucos, entregando valor a cada etapa.',
+  },
+];
+
+// TODO (Maycon): atualizar mensalmente
+const agora = [
+  { rotulo: 'Construindo', texto: 'Este portfólio, com deploy automatizado no GitHub Actions.' },
+  { rotulo: 'Evoluindo', texto: 'Testes de integração e CI nos projetos de mensageria.' },
+  { rotulo: 'Estudando', texto: 'Workers escaláveis na AWS (ECS) e infraestrutura como código.' },
+  { rotulo: 'Explorando', texto: 'Tradução de voz em tempo real com modelos multimodais.' },
+];
+---
+
+<Base
+  title="Maycon Lemos · Senior Full Stack Engineer"
+  description="Engenheiro de software sênior: sistemas distribuídos, .NET, Node e IA aplicada a produtos reais."
+>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Senior Full Stack Engineer · .NET · Node · Cloud</p>
+        <h1 class="display hero-title">
+          Construo sistemas que aguentam produção e coloco IA neles sem estourar latência nem custo.
+        </h1>
+        <p class="hero-sub">
+          Mais de 10 anos desenvolvendo aplicações nos setores financeiro e de saúde, de microsserviços e
+          mensageria a modernização de legado.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#cases">Ver cases</a>
+          <a class="btn" href={linkedin} target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href={github} target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-block" aria-hidden="true"></div>
+        <img
+          src="/fotos/cena1-bracos-cruzados-bege.webp"
+          alt="Maycon Lemos de braços cruzados, sorrindo e olhando para o alto"
+          width="559"
+          height="1050"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cases">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Cases</p>
+        <h2 class="display">Problemas reais, decisões explicadas.</h2>
+      </div>
+      <ol class="cases">
+        {
+          cases.map((c) => (
+            <li class="case">
+              <a href={`/cases/${c.slug}/`} class="case-link">
+                <span class="case-num">{c.numero}</span>
+                <div class="case-body">
+                  <h3 class="display case-title">{c.titulo}</h3>
+                  <p class="case-resumo">{c.resumo}</p>
+                  <div class="case-stack">
+                    {c.stack.map((s) => (
+                      <span class="chip">{s}</span>
+                    ))}
+                  </div>
+                </div>
+                <span class="case-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="como-trabalho">
+    <div class="wrap split">
+      <div class="split-photo">
+        <div class="photo-block small" aria-hidden="true"></div>
+        <img
+          src="/fotos/cena6-notebook.webp"
+          alt="Maycon concentrado, digitando em um notebook"
+          width="907"
+          height="1076"
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">Como eu trabalho</p>
+          <h2 class="display">O que guia minhas decisões técnicas.</h2>
+        </div>
+        <div class="principios">
+          {
+            principios.map((p) => (
+              <article>
+                <h3>{p.titulo}</h3>
+                <p>{p.texto}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="wrap split reverse">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">Sobre</p>
+          <h2 class="display">Engenharia com os pés no chão.</h2>
+        </div>
+        <div class="prose">
+          <p>
+            Sou engenheiro de software full stack com foco em .NET, Node.js e React. Trabalho há mais de 10 anos
+            construindo aplicações web escaláveis, sistemas distribuídos e soluções em cloud.
+          </p>
+          <p>
+            Atuei na implementação de arquiteturas de microsserviços em ambientes financeiros, na construção de
+            microfrontends com deploy independente e na modernização de sistemas legados. Hoje dedico boa parte do
+            tempo a integrar IA em produtos de verdade — olhando para arquitetura, latência, custo e qualidade de
+            resposta.
+          </p>
+        </div>
+        <div class="case-stack">
+          <span class="chip">.NET / C#</span>
+          <span class="chip">Node.js / NestJS</span>
+          <span class="chip">React / Angular</span>
+          <span class="chip">Kafka / RabbitMQ</span>
+          <span class="chip">AWS / Azure</span>
+          <span class="chip">Docker</span>
+          <span class="chip">LLMs</span>
+        </div>
+      </div>
+      <div class="split-photo">
+        <div class="photo-block small" aria-hidden="true"></div>
+        <img
+          src="/fotos/cena3-jeans-sereno.webp"
+          alt="Maycon de braços cruzados, olhando para o lado com expressão serena"
+          width="738"
+          height="1030"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="agora">
+    <div class="wrap split">
+      <div class="split-photo">
+        <div class="photo-block small" aria-hidden="true"></div>
+        <img
+          src="/fotos/cena5-tablet.webp"
+          alt="Maycon de fone de ouvido, sorrindo enquanto lê em um tablet"
+          width="923"
+          height="1042"
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">Agora</p>
+          <h2 class="display">No que estou trabalhando este mês.</h2>
+        </div>
+        <dl class="agora">
+          {
+            agora.map((a) => (
+              <div>
+                <dt>{a.rotulo}</dt>
+                <dd>{a.texto}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contato" id="contato">
+    <div class="wrap">
+      <p class="eyebrow">Contato</p>
+      <h2 class="display contato-title">Tem um sistema que precisa aguentar produção? Vamos conversar.</h2>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href={linkedin} target="_blank" rel="noopener">Falar no LinkedIn</a>
+        <a class="btn" href={github} target="_blank" rel="noopener">Ver o GitHub</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: clamp(32px, 6vw, 72px) 0 0;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 64px);
+    align-items: end;
+    min-height: calc(100svh - 64px - clamp(32px, 6vw, 72px));
+  }
+  .hero-text {
+    align-self: center;
+    padding-bottom: clamp(24px, 4vw, 48px);
+  }
+  .hero-title {
+    font-size: clamp(34px, min(4.6vw, 7.4vh), 64px);
+  }
+  .hero-sub {
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 34em;
+    margin: 28px 0 0;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    height: 46px;
+    padding: 0 20px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .btn:hover {
+    border-color: var(--ink-muted);
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .btn-primary:hover {
+    opacity: 0.88;
+  }
+
+  .hero-photo,
+  .split-photo {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .hero-photo img {
+    position: relative;
+    width: auto;
+    max-width: 100%;
+    height: min(78vh, 720px);
+    object-fit: contain;
+    object-position: bottom;
+  }
+  .photo-block {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: 0;
+    height: 72%;
+    background: var(--photo-bg);
+    border-radius: 32px 32px 0 0;
+  }
+  .photo-block.small {
+    border-radius: 28px 28px 0 0;
+    height: 78%;
+  }
+  .split-photo img {
+    position: relative;
+    width: auto;
+    max-width: 100%;
+    height: min(64vh, 540px);
+    object-fit: contain;
+    object-position: bottom;
+  }
+
+  .cases {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .case {
+    border-bottom: 1px solid var(--line);
+  }
+  .case-link {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) 40px;
+    gap: 24px;
+    padding: 40px 0;
+    text-decoration: none;
+    align-items: start;
+  }
+  .case-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--ink-muted);
+  }
+  .case-title {
+    font-size: clamp(24px, 3vw, 34px);
+    transition: color 0.2s;
+  }
+  .case-resumo {
+    color: var(--ink-soft);
+    max-width: 44em;
+    margin: 12px 0 18px;
+  }
+  .case-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .case-arrow {
+    font-size: 28px;
+    color: var(--ink-muted);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .case-link:hover .case-title,
+  .case-link:hover .case-arrow {
+    color: var(--accent);
+  }
+  .case-link:hover .case-arrow {
+    transform: translateX(6px);
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(32px, 6vw, 96px);
+    align-items: center;
+  }
+  .split.reverse {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  }
+  .principios {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 40px;
+  }
+  .principios h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+  .principios p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .prose p {
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    max-width: 38em;
+  }
+
+  .agora {
+    margin: 0;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .agora div {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .agora dt {
+    color: var(--ink-muted);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 2px;
+  }
+  .agora dd {
+    margin: 0;
+  }
+
+  .contato-title {
+    font-size: clamp(32px, 5vw, 60px);
+    max-width: 18em;
+  }
+
+  @media (max-width: 860px) {
+    .hero-grid,
+    .split,
+    .split.reverse {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hero-grid {
+      min-height: 0;
+    }
+    .hero-text {
+      padding-bottom: 0;
+    }
+    .hero-photo img {
+      height: min(60vh, 460px);
+    }
+    .split-photo {
+      order: -1;
+    }
+    .split-photo img {
+      height: min(52vh, 380px);
+    }
+    .principios {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .case-link {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      padding: 32px 0;
+    }
+    .case-arrow {
+      display: none;
+    }
+    .agora div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+    }
+  }
+</style>

@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = '/fotos/cena1-bracos-cruzados-bege.webp' } = Astro.props;
+const ogImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a href="/" class="brand">Maycon Lemos</a>
+        <nav aria-label="Principal">
+          <a href="/#cases">Cases</a>
+          <a href="/#como-trabalho">Como eu trabalho</a>
+          <a href="/#agora">Agora</a>
+          <a href="/#contato">Contato</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <span>© {new Date().getFullYear()} Maycon Lemos</span>
+        <span>Feito com Astro · publicado no GitHub Pages</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 16px;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-size: 20px;
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    gap: 24px;
+    font-size: 15px;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+  nav a:hover {
+    color: var(--ink);
+  }
+  .footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  @media (max-width: 720px) {
+    nav {
+      display: none;
+    }
+  }
+</style>
